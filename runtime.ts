@@ -12,11 +12,19 @@ import * as ts from "typescript";
 import * as util from "./util";
 import { log } from "./util";
 import * as os from "./os";
+import { pub, sub } from "./dispatch";
 import * as sourceMaps from "./v8_source_maps";
 import { _global, globalEval } from "./globals";
-import * as deno from "./deno";
 
 const EOL = "\n";
+
+// Public deno module.
+const deno = {
+  pub,
+  sub,
+  readFileSync: os.readFileSync,
+  writeFileSync: os.writeFileSync
+};
 
 // tslint:disable-next-line:no-any
 export type AmdFactory = (...args: any[]) => undefined | object;
